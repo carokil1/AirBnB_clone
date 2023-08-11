@@ -3,7 +3,7 @@
 """This is a class BaseModel that defines all
 common attributes/methods for other classes"""
 
-import models #importing classes from the models module
+#import models importing classes from the models module
 import uuid
 from datetime import datetime
 
@@ -18,16 +18,19 @@ class BaseModel:
             **kwargs: key/value pairs representing attributes.
         """
 
-            self.id = str(uuid.uuid4())
-            self.created_at = self.updated_at = datetime.now()
-            if len(kwargs) != 0:
-                for key, value, in kwargs.items():
-                    if key == 'created_at' or key == 'updated_at':
-                        self.__dict__[key] = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                    else:
-                        self.__dict__[key] = value
-            else:
-                models.storage.new(self)
+        self.id = str(uuid.uuid4())
+        self.created_at = self.updated_at = datetime.now()
+        if len(kwargs) != 0:
+            for key, value, in kwargs.items():
+                if key == 'created_at' or key == 'updated_at':
+                    self.__dict__[key] = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                else:
+                    self.__dict__[key] = value
+        else:
+           self.id = str(uuid.uuid4())
+           self.created_at = datetime.now() 
+
+            #models.storage.new(self)
 
     def __str__(self):
         """
