@@ -5,7 +5,9 @@ common attributes/methods for other classes"""
 
 #import models importing classes from the models module
 import uuid
+#import models
 from datetime import datetime
+#from models.__init__ import storage
 
 class BaseModel:
     """This class represents the BaseModel of the AirBnB project."""
@@ -28,9 +30,8 @@ class BaseModel:
                     self.__dict__[key] = value
         else:
            self.id = str(uuid.uuid4())
-           self.created_at = self.updated_at = datetime.now() 
-
-            #models.storage.new(self)
+           self.created_at = self.updated_at = datetime.now()
+           models.storage.new(self)
 
     def __str__(self):
         """
