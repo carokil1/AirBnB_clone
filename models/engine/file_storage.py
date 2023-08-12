@@ -25,7 +25,9 @@ class FileStorage:
         """
         sets in __objects the obj with key <obj class name>.id
         """
-        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        key = str(obj.__class__.__name__) + '.' + str(obj.id)
+        value_dict = obj
+        FileStorage.__objects[key] = value_dict
 
     def save(self):
         """
@@ -45,7 +47,7 @@ class FileStorage:
                 FileStorage.__objects = json.load(json_file)
             for key, value in FileStorage.__objects.items():
                 class_name = value["__class__"]
-                class_def = getattr(models,class_name)
+                class_def = models.classes[class_name]
                 FileStorage.__objects[key] = class_def(**value)
         except FileNotFoundError:
             pass
