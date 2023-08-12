@@ -3,7 +3,7 @@
     Defines the class FileStorage
 """
 import json
-#import models
+import models
 
 class FileStorage:
     """Serializes instances to a JSON file and deserializes JSON file.
@@ -33,7 +33,7 @@ class FileStorage:
         """
         o_dict = FileStorage.__objects
         obj_dict = {obj: o_dict[obj].to_dict() for obj in o_dict.keys()}
-        with open(Filestorage.__file_path, encoding="UFT8", mode="w") as json_file:
+        with open(Filestorage.__file_path, encoding="UTF8", mode="w") as json_file:
             json.dump(obj_dict, json_file)
 
     def reload(self):
@@ -45,7 +45,7 @@ class FileStorage:
                 FileStorage.__objects = json.load(json_file)
             for key, value in FileStorage.__objects.items():
                 class_name = value["__class__"]
-                class_def = models.classes[class_name]
+                class_def = getattr(models,class_name)
                 FileStorage.__objects[key] = class_def(**value)
         except FileNotFoundError:
             pass
