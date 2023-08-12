@@ -3,9 +3,8 @@
 """This is a class BaseModel that defines all
 common attributes/methods for other classes"""
 
-#import models importing classes from the models module
+import models #importing classes from the models module
 import uuid
-#import models
 from datetime import datetime
 #from models.__init__ import storage
 

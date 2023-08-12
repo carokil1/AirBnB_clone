@@ -13,5 +13,5 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-storage = Filestorage()
+storage = FileStorage()
 storage.reload()

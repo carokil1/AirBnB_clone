@@ -35,9 +35,9 @@ class FileStorage:
         """
         o_dict = FileStorage.__objects
         obj_dict = {obj: o_dict[obj].to_dict() for obj in o_dict.keys()}
-        with open(Filestorage.__file_path, encoding="UTF8", mode="w") as json_file:
+        with open(FileStorage.__file_path, encoding="UTF8", mode="w") as json_file:
             json.dump(obj_dict, json_file)
-  
+
     def reload(self):
         """
         deserializes the JSON file to __objects
@@ -47,7 +47,7 @@ class FileStorage:
                 FileStorage.__objects = json.load(json_file)
             for key, value in FileStorage.__objects.items():
                 class_name = value["__class__"]
-                class_def = models.classes[class_name]
+                class_def = getattr(models,class_name)
                 FileStorage.__objects[key] = class_def(**value)
         except FileNotFoundError:
             pass
