@@ -24,28 +24,25 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
+        """Quit command to exit consle
         """
-        Quit command to exit consle
-        """
+
         return True
 
     def do_EOF(self, arg):
-        """
-        Hanles the EOF command to exit the program
+        """Hanles the EOF command to exit the program
         """
         #print()
         return True
 
     def emptyline(self):
-        """
-        Called when an empty line is entered; does nothing.
+        """Called when an empty line is entered; does nothing.
         """
         pass
 
 
     def do_create(self, args):
-        '''
-            Create a new instance of class BaseModel and saves it
+        '''Create a new instance of class BaseModel and saves it
             to the JSON file Creates,and prints the id.       
             '''
         if len(args) == 0:
@@ -61,8 +58,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")       
 
     def do_show(self, args):
-        '''
-            Print the string representation of an instance based on
+        '''Print the string representation of an instance based on
             the class name and id.
         '''
         args = shlex.split(args)
@@ -226,4 +222,3 @@ if __name__ == "__main__":
         Entry point for the loop.
     '''
     HBNBCommand().cmdloop()
-
