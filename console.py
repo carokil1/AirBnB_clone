@@ -129,10 +129,10 @@ class HBNBCommand(cmd.Cmd):
             return
         for key, val in objects.items():
             if len(args) != 0:
-                if type(val) is eval(args):
-                    obj_list.append(val)
+                if val.__class__.__name__ == args: #filter by class name
+                    obj_list.append(str(val)) #print str rep
             else:
-                obj_list.append(val)
+                obj_list.append(str(val))
 
         print(obj_list)
 
