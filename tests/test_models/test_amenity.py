@@ -9,6 +9,7 @@ from datetime import datetime
 from time import sleep
 from models.amenity import Amenity
 
+
 class TestAmenity_instantiation(unittest.TestCase):
     """Unittests for testing instantiation of Amenity.
     """
@@ -90,7 +91,7 @@ class TestAmenity_save(unittest.TestCase):
             os.rename("file.json", "tmp")
         except IOError:
             pass
- 
+
     def tearDown(self):
         try:
             os.remove("file.json")
@@ -130,6 +131,7 @@ class TestAmenity_save(unittest.TestCase):
         amtyid = "Amenity." + amty.id
         with open("file.json", "r") as json_file:
             self.assertIn(amtyid, json_file.read())
+
 
 class TestAmenity_to_dict(unittest.TestCase):
     """Unittests for testing to_dict method of the class Amenity."""

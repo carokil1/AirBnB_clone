@@ -2,11 +2,15 @@
 """Defines unittests for models/base_model.py.
 """
 import os
+import sys
 import models
 import unittest
 from datetime import datetime
 from time import sleep
 from models.base_model import BaseModel
+
+# Add the parent directory to the sys.path to access the 'models' package
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 class TestBaseModel_instantiation(unittest.TestCase):
@@ -75,7 +79,8 @@ class TestBaseModel_instantiation(unittest.TestCase):
     def test_instantiation_with_args_and_kwargs(self):
         dtm = datetime.today()
         dtm_iso = dtm.isoformat()
-        bmdl = BaseModel("12", id="345", created_at=dtm_iso, updated_at=dtm_iso)
+        bmdl = BaseModel("12", id="345",
+                         created_at=dtm_iso, updated_at=dtm_iso)
         self.assertEqual(bmdl.id, "345")
         self.assertEqual(bmdl.created_at, dtm)
         self.assertEqual(bmdl.updated_at, dtm)

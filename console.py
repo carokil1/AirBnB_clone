@@ -16,11 +16,12 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """
     custom command interpreter entry point
     """
-    
+
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
@@ -32,7 +33,6 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """Hanles the EOF command to exit the program
         """
-        #print()
         return True
 
     def emptyline(self):
@@ -40,10 +40,9 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
-
     def do_create(self, args):
         '''Create a new instance of class BaseModel and saves it
-            to the JSON file Creates,and prints the id.       
+            to the JSON file Creates,and prints the id.
             '''
         if len(args) == 0:
             print("** class name missing **")
@@ -54,8 +53,8 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
 
-        except:
-            print("** class doesn't exist **")       
+        except NameError:
+            print("** class doesn't exist **")
 
     def do_show(self, args):
         '''Print the string representation of an instance based on
@@ -129,8 +128,8 @@ class HBNBCommand(cmd.Cmd):
             return
         for key, val in objects.items():
             if len(args) != 0:
-                if val.__class__.__name__ == args: #filter by class name
-                    obj_list.append(str(val)) #print str rep
+                if val.__class__.__name__ == args:   # filter by class name
+                    obj_list.append(str(val))  # print str rep
             else:
                 obj_list.append(str(val))
 
@@ -176,7 +175,6 @@ class HBNBCommand(cmd.Cmd):
         setattr(obj_value, args[2], args[3])
         obj_value.save()
 
-
     def do_count(self, args):
         '''
             Counts/retrieves the number of instances.
@@ -204,8 +202,8 @@ class HBNBCommand(cmd.Cmd):
             Catches all the function names that are not expicitly defined.
         '''
         functions = {"all": self.do_all, "update": self.do_update,
-                "show": self.do_show, "count": self.do_count,
-                "destroy": self.do_destroy, "update": self.do_update}
+                     "show": self.do_show, "count": self.do_count,
+                     "destroy": self.do_destroy}  # "update twice so removed
         args = (args.replace("(", ".").replace(")", ".")
                 .replace('"', "").replace(",", "").split("."))
 
@@ -213,7 +211,7 @@ class HBNBCommand(cmd.Cmd):
             cmd_arg = args[0] + " " + args[2]
             func = functions[args[1]]
             func(cmd_arg)
-        except:
+        except ValueError:
             print("*** Unknown syntax:", args[0])
 
 
