@@ -16,6 +16,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class TestFileStorage_instantiation(unittest.TestCase):
     """Tests the instatiation of the FileStorage class.
     """
@@ -34,6 +35,7 @@ class TestFileStorage_instantiation(unittest.TestCase):
 
     def test_storage_initializes(self):
         self.assertEqual(type(models.storage), FileStorage)
+
 
 class TestFileStorage_methods(unittest.TestCase):
     """Tests the methods of the FileStorage class
